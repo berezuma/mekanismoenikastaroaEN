@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanisms & Machines - Online Course</title>
+    <style>
+        :root {
+            --primary: #2178C7;
+            --primary-dark: #1a5fa3;
+            --primary-light: #e6f0ff;
+            --secondary: #f56547;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --box-shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #fff;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* ============ SIDEBAR & LAYOUT ============ */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--gray-100);
+            padding: 2rem 0;
+            border-right: 1px solid var(--gray-300);
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            padding: 0.75rem 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-item {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .sidebar-item:hover {
+            background: var(--gray-200);
+            color: var(--primary);
+        }
+
+        .sidebar-item.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 2rem;
+        }
+
+        .main-content > * + * {
+            margin-top: 2rem;
+        }
+
+        /* ============ SECTIONS ============ */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ TYPOGRAPHY ============ */
+        h1 {
+            font-size: 2.2rem;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--gray-800);
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.75rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--gray-800);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        strong {
+            color: var(--gray-800);
+            font-weight: 600;
+        }
+
+        /* ============ CARDS & BOXES ============ */
+        .learning-card {
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .learning-card:hover {
+            box-shadow: var(--box-shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .info-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--primary-dark);
+        }
+
+        .example-box {
+            background: #f0f8ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .example-box strong {
+            color: var(--primary-dark);
+        }
+
+        .success-box {
+            background: #f0fde4;
+            border-left: 4px solid var(--success);
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .success-box p {
+            color: #27ae60;
+            margin: 0;
+        }
+
+        /* ============ LISTS ============ */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.95rem;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 120, 199, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-200);
+            color: var(--gray-800);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        /* ============ FORMS ============ */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(33, 120, 199, 0.1);
+        }
+
+        /* ============ PROGRESS BAR ============ */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* ============ QUIZ & EXERCISES ============ */
+        .exercise-question {
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option:hover {
+            background: var(--gray-100);
+            border-color: var(--primary);
+        }
+
+        .option input[type="radio"] {
+            width: auto;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .option.selected {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .feedback {
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #dc3545;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* ============ TABLE ============ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--gray-300);
+            color: var(--text-light);
+        }
+
+        tr:hover {
+            background: var(--gray-100);
+        }
+
+        /* ============ CODE/FORMULA ============ */
+        code {
+            background: var(--gray-100);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .formula-box {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            color: var(--gray-800);
+            overflow-x: auto;
+        }
+
+        /* ============ TABS ============ */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--gray-300);
+            margin-bottom: 1.5rem;
+            gap: 0;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray-600);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .tab-button:hover {
+            color: var(--primary);
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ============ ACCORDION ============ */
+        .accordion-item {
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1rem;
+            background: var(--gray-100);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background: var(--gray-200);
+        }
+
+        .accordion-icon {
+            transition: var(--transition);
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 1000px;
+            padding: 1rem;
+        }
+
+        /* ============ IMAGES ============ */
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .course-image {
+            max-width: 60%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: block;
+            margin: 1rem auto;
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .image-credit {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .image-credit a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .image-credit a:hover {
+            text-decoration: underline;
+        }
+
+        .license-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--gray-300);
+            color: var(--gray-800);
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            padding-bottom: 80px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .example-item {
+            text-align: center;
+            background: white;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .example-item:hover {
+            box-shadow: var(--box-shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .example-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .example-label {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin: 0;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: none;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--gray-300);
+                display: flex;
+                overflow-x: auto;
+                padding: 1rem 0;
+            }
+
+            .sidebar-section {
+                margin-bottom: 0;
+                margin-right: 2rem;
+                white-space: nowrap;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            td, th {
+                padding: 0.6rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+    <div class="header-container">
+        <div>
+            <div class="header-title">Mechanisms and Machines</div>
+            <div class="header-subtitle">Interactive Online Course for High School Students</div>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" onclick="showProgress()">Progress</button>
+        </div>
+    </div>
+</header>
+
+<!-- ============ MAIN CONTAINER ============ -->
+<div class="container">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">Fundamentals</div>
+            <div class="sidebar-item active" onclick="showSection('intro')">Introduction</div>
+            <div class="sidebar-item" onclick="showSection('definitions')">Key Definitions</div>
+            <div class="sidebar-item" onclick="showSection('machine-parts')">Parts of a Machine</div>
+            <div class="sidebar-item" onclick="showSection('motion-types')">Types of Motion</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Transmission Mechanisms</div>
+            <div class="sidebar-item" onclick="showSection('levers')">Levers</div>
+            <div class="sidebar-item" onclick="showSection('pulleys')">Pulleys</div>
+            <div class="sidebar-item" onclick="showSection('gears')">Gears</div>
+            <div class="sidebar-item" onclick="showSection('chain-drive')">Chain Drive</div>
+            <div class="sidebar-item" onclick="showSection('belt-drive')">Belt Drive</div>
+            <div class="sidebar-item" onclick="showSection('worm-gear')">Worm Gear</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Transformation Mechanisms</div>
+            <div class="sidebar-item" onclick="showSection('rack-pinion')">Rack &amp; Pinion</div>
+            <div class="sidebar-item" onclick="showSection('cam')">Cams &amp; Eccentrics</div>
+            <div class="sidebar-item" onclick="showSection('crankshaft')">Crank &amp; Connecting Rod</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Real Applications</div>
+            <div class="sidebar-item" onclick="showSection('steam-engine')">Steam Engine</div>
+            <div class="sidebar-item" onclick="showSection('gas-engine')">Gasoline Engine</div>
+            <div class="sidebar-item" onclick="showSection('bicycle')">Bicycle Mechanics</div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">Assessment</div>
+            <div class="sidebar-item" onclick="showSection('exercises')">Exercises</div>
+            <div class="sidebar-item" onclick="showSection('quiz')">Knowledge Quiz</div>
+        </div>
+    </aside>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main class="main-content">
+
+        <!-- ============ INTRODUCTION ============ -->
+        <section id="intro" class="section active">
+            <h1>Welcome to Mechanisms &amp; Machines</h1>
+            <div class="info-box">
+                <p><strong>Course Goal:</strong> Understand how machines and mechanisms transmit and transform motion and force to make our lives easier.</p>
+            </div>
+
+            <h2>What Will You Learn?</h2>
+            <ul>
+                <li>How machines work and why they reduce effort</li>
+                <li>The fundamental parts of any machine system</li>
+                <li>How to analyze different types of mechanisms</li>
+                <li>Real-world applications in cars, bicycles, and industrial equipment</li>
+                <li>Mathematical relationships governing mechanical advantage</li>
+            </ul>
+
+            <h2>Course Structure</h2>
+            <p>This course is organized into three main sections:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Topics</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fundamentals</strong></td>
+                        <td>Definitions, machine parts, motion types</td>
+                        <td>Foundation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transmission</strong></td>
+                        <td>Levers, pulleys, gears, belts, chains</td>
+                        <td>Motion transmission</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transformation</strong></td>
+                        <td>Rack &amp; pinion, cams, crankshaft</td>
+                        <td>Motion conversion</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="showSection('definitions')">Start Learning →</button>
+                <button class="btn btn-secondary" onclick="showSection('exercises')">See Exercises</button>
+            </div>
+        </section>
+
+        <!-- ============ KEY DEFINITIONS ============ -->
+        <section id="definitions" class="section">
+            <h1>Key Definitions</h1>
+
+            <h2>What is a Machine?</h2>
+            <div class="learning-card">
+                <p><strong>Definition:</strong> A machine is a device designed to <strong>reduce the effort</strong> needed to perform work or to <strong>change the direction of applied force</strong>.</p>
+                <h3>Common Examples:</h3>
+                <ul>
+                    <li>Crane</li>
+                    <li>Excavator</li>
+                    <li>Bicycle</li>
+                    <li>Knife</li>
+                    <li>Tweezers</li>
+                    <li>Elevator</li>
+                    <li>Robot</li>
+                </ul>
+            </div>
+
+            <div class="examples-grid">
+                <div class="example-item">
+                    <img src="https://commons.wikimedia.org/wiki/File:Chantier_de_construction,_Monastir,_Tunisie_-_29.jpg" alt="Construction crane lifting heavy loads" class="example-img" />
+                    <p class="example-label">Crane</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Chantier_de_construction,_Monastir,_Tunisie_-_29.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Caterpillar_330B_Hydraulic_Excavator_bucket_and_arm_-_Hillsboro,_Oregon.JPG" alt="Excavator with hydraulic arm" class="example-img" />
+                    <p class="example-label">Excavator</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Caterpillar_330B_Hydraulic_Excavator_bucket_and_arm_-_Hillsboro,_Oregon.JPG" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mountainbike.jpg" alt="Bicycle with chain and gears" class="example-img" />
+                    <p class="example-label">Bicycle</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Mountainbike.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tools.png" alt="Various tools including knife and tweezers" class="example-img" />
+                    <p class="example-label">Hand Tools</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Tools.png" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>What is a Mechanism?</h2>
+            <div class="learning-card">
+                <p><strong>Definition:</strong> A mechanism is the part of a machine that <strong>transmits or transforms</strong> the motion and force from the driving element (motor) to the driven element (load).</p>
+                <p>Think of it as the "connecting piece" that makes the machine work. Examples include chains, gears, belts, and pulleys.</p>
+            </div>
+
+            <h2>Mechanical Advantage</h2>
+            <div class="learning-card">
+                <p><strong>Definition:</strong> Mechanical advantage is the ratio of the <strong>resistance force to the applied force</strong>.</p>
+                <div class="formula-box">
+                    Mechanical Advantage = Resistance / Applied Force
+                </div>
+                <p>A higher mechanical advantage means you need to apply less force to overcome the resistance.</p>
+            </div>
+
+            <h2>Key Concepts</h2>
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    Force (F) and Resistance (R)
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Force (F):</strong> The effort you apply to the machine.</p>
+                    <p><strong>Resistance (R):</strong> The weight or load you're trying to move or lift.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    Linear and Circular Motion
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Linear Motion:</strong> Straight-line movement (back-and-forth or up-and-down).</p>
+                    <p><strong>Circular Motion:</strong> Rotating or spinning motion around an axis.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    Transmission vs Transformation
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <p><strong>Transmission:</strong> Passing the same type of motion from input to output (circular to circular, or linear to linear).</p>
+                    <p><strong>Transformation:</strong> Converting one type of motion into another (circular to linear, or linear to circular).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ MACHINE PARTS ============ -->
+        <section id="machine-parts" class="section">
+            <h1>Parts of a Machine</h1>
+            <p>Every machine has three essential components working together:</p>
+
+            <h2>1. Driving Element (Motor)</h2>
+            <div class="learning-card">
+                <p>The <strong>driving element</strong> provides the initial force or motion to the machine. It could be:</p>
+                <ul>
+                    <li>Electric motor</li>
+                    <li>Gasoline/diesel engine</li>
+                    <li>Human muscle power (pedaling, pushing, pulling)</li>
+                    <li>Natural forces (wind, water current)</li>
+                    <li>Steam engine</li>
+                </ul>
+            </div>
+
+            <div class="examples-grid">
+                <div class="example-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Cut-away_version_of_an_electric_motor_%281%29.JPG/1024px-Cut-away_version_of_an_electric_motor_%281%29.JPG" alt="Cut-away electric motor showing internal components" class="example-img" />
+                    <p class="example-label">Electric Motor</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Cut-away_version_of_an_electric_motor_(1).JPG" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767110913/search_images/770843cd9d97d531dae235f6b8b2125e9e88d9b0.jpg" alt="Moore single cylinder gasoline engine" class="example-img" />
+                    <p class="example-label">Gasoline Engine</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Moore-single-cylinder-gasoline-engine.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1765562592/search_images/4ee834d9e9ce70c2afee16647c55a07875b67ff1.jpg" alt="Boulton and Watt steam engine from 1784" class="example-img" />
+                    <p class="example-label">Steam Engine</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:SteamEngine_Boulton%26Watt_1784.png" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>2. Mechanism</h2>
+            <div class="learning-card">
+                <p>The <strong>mechanism</strong> transmits and/or transforms the motion from the driving element. Common mechanisms include:</p>
+                <ul>
+                    <li>Levers</li>
+                    <li>Gears</li>
+                    <li>Pulleys</li>
+                    <li>Belts and chains</li>
+                    <li>Screws and cranks</li>
+                </ul>
+            </div>
+
+            <div class="examples-grid">
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767111953/search_images/cc0a15227fd4ac6c9e5f6439bbc2459c33074021.jpg" alt="Multiple gears showing transmission" class="example-img" />
+                    <p class="example-label">Gears</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Gears.JPG" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Z-pulley.jpg/2560px-Z-pulley.jpg" alt="Pulley system with rope and blocks" class="example-img" />
+                    <p class="example-label">Pulleys</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Z-pulley.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767111952/search_images/928382d4d850f55d0a2a46814ce0eb2107e241bd.jpg" alt="Lever mechanism showing fulcrum and arms" class="example-img" />
+                    <p class="example-label">Levers</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Voting_machine_lever.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>3. Driven Element (Load/Receptor)</h2>
+            <div class="learning-card">
+                <p>The <strong>driven element</strong> is what performs the useful work. It receives the transformed motion and uses it to do something. Examples:</p>
+                <ul>
+                    <li>Wheels (in a bicycle or car)</li>
+                    <li>Cutting blades (in a saw)</li>
+                    <li>Drill bit (in a drill)</li>
+                    <li>Pump impeller (in a water pump)</li>
+                </ul>
+            </div>
+
+            <div class="examples-grid">
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767111952/search_images/2faaa2828b4c78cb70f8c32f2ebf9d5364057b12.jpg" alt="Mountain bicycle showing wheels and components" class="example-img" />
+                    <p class="example-label">Bicycle</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Mountainbike.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767111953/search_images/34ec52168b0d71cfdd99af8c81b02a808d7673ca.jpg" alt="Cold metal cutting saw blade" class="example-img" />
+                    <p class="example-label">Cutting Blades</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Cold_Metal_Cutting_Saw.JPG" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767111953/search_images/1b76edde1742aa7bc8d264b3667420f32efbea32.jpg" alt="Concrete drill bit" class="example-img" />
+                    <p class="example-label">Drill Bits</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:Concrete_drill_bit.JPG" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+                <div class="example-item">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1767111952/search_images/5d692676df336859729581eb3e489fab5227648a.jpg" alt="Pump impeller component" class="example-img" />
+                    <p class="example-label">Pump Impeller</p>
+                    <div class="image-credit">
+                        📷 <a href="https://commons.wikimedia.org/wiki/File:02_Impeller.jpg" target="_blank">Wikimedia Commons</a>
+                        | <span class="license-badge">CC-BY-SA 3.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Example: Bicycle</h2>
+            <div class="example-box">
+                <p><strong>1. Driving Element:</strong> Your muscles pushing the pedals</p>
+                <p><strong>2. Mechanism:</strong> Chain and sprockets that transmit your pedaling motion</p>
+                <p><strong>3. Driven Element:</strong> The wheels that rotate and move the bike forward</p>
+            </div>
+        </section>
+
+        <!-- ============ MOTION TYPES ============ -->
+        <section id="motion-types" class="section">
+            <h1>Types of Motion in Machines</h1>
+            <p>Machines can produce or require four main types of motion:</p>
+
+            <h2>1. Linear (Translational) Motion</h2>
+            <div class="learning-card">
+                <p>Movement in a <strong>straight line</strong> in one direction.</p>
+                <p><strong>Examples:</strong> An elevator moving up, a piston moving in a cylinder, a door sliding open.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1767110913/search_images/e6372bf55241939fc1fef2807c41c34dda377566.jpg" alt="Elevator doors demonstrating linear vertical motion" class="course-image" />
+                <p class="image-caption">Linear motion example - elevator moving vertically up and down</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/Category:Elevator_doors" target="_blank">Wikimedia Commons</a>
+                    | <span class="license-badge">CC-BY-SA 3.0</span>
+                </div>
+            </div>
+
+            <h2>2. Circular (Rotational) Motion</h2>
+            <div class="learning-card">
+                <p>Movement in a <strong>rotating or spinning</strong> pattern around a fixed axis.</p>
+                <p><strong>Examples:</strong> A wheel spinning, a gear rotating, a fan blade turning.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1767110914/search_images/438b7c010b34155603db810ecf8104659561f530.jpg" alt="Rotating ceiling fan blade showing circular motion" class="course-image" />
+                <p class="image-caption">Circular motion example - ceiling fan blades rotating around a fixed center</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Rotating_three_blade_ceiling_fan.jpg" target="_blank">Wikimedia Commons</a>
+                    | <span class="license-badge">CC-BY-SA 3.0</span>
+                </div>
+            </div>
+
+            <h2>3. Reciprocating (Alternating) Motion</h2>
+            <div class="learning-card">
+                <p>Back-and-forth or up-and-down <strong>linear motion</strong>.</p>
+                <p><strong>Examples:</strong> A piston moving back and forth in a car engine, windshield wipers moving side-to-side, a sewing machine needle moving up and down.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1767110913/search_images/a28c26fa682def3e0f91dde6cc172839c23f9cc8.jpg" alt="Piston from DAT engine showing back and forth motion" class="course-image" />
+                <p class="image-caption">Reciprocating motion example - piston moving back and forth in a cylinder</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Piston_of_DAT_engine.jpg" target="_blank">Wikimedia Commons</a>
+                    | <span class="license-badge">CC-BY-SA 3.0</span>
+                </div>
+            </div>
+
+            <h2>4. Oscillating Motion</h2>
+            <div class="learning-card">
+                <p>Back-and-forth <strong>rotational motion</strong> that doesn't complete a full rotation.</p>
+                <p><strong>Examples:</strong> A pendulum swinging, a lever rocking back and forth.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Simple_pendulum_height.svg/1046px-Simple_pendulum_height.svg.png" alt="Simple pendulum swinging back and forth showing oscillation" class="course-image" />
+                <p class="image-caption">Oscillating motion example - pendulum swinging back and forth</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Simple_pendulum_height.svg" target="_blank">Wikimedia Commons</a>
+                    | <span class="license-badge">CC-BY-SA 3.0</span>
+                </div>
+            </div>
+
+            <h2>Motion Relationships</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Input Motion</th>
+                        <th>Output Motion</th>
+                        <th>Mechanism Type</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Circular</td>
+                        <td>Circular</td>
+                        <td>Transmission</td>
+                        <td>Gears, belts</td>
+                    </tr>
+                    <tr>
+                        <td>Linear</td>
+                        <td>Linear</td>
+                        <td>Transmission</td>
+                        <td>Lever</td>
+                    </tr>
+                    <tr>
+                        <td>Circular</td>
+                        <td>Linear</td>
+                        <td>Transformation</td>
+                        <td>Crank &amp; rod</td>
+                    </tr>
+                    <tr>
+                        <td>Linear</td>
+                        <td>Circular</td>
+                        <td>Transformation</td>
+                        <td>Rack &amp; pinion</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ============ LEVERS ============ -->
+        <section id="levers" class="section">
+            <h1>Levers: Simple Machines</h1>
+            <p>A lever is one of the simplest and most useful machines. <strong>"Give me a lever and a place to stand, and I will move the world" — Archimedes</strong></p>
+
+            <h2>What is a Lever?</h2>
+            <div class="learning-card">
+                <p>A lever is a <strong>rigid bar</strong> that rotates around a <strong>fixed point called the fulcrum</strong>. It's used to:</p>
+                <ul>
+                    <li>Reduce the effort needed to move an object</li>
+                    <li>Increase the distance moved</li>
+                    <li>Change the direction of applied force</li>
+                </ul>
+            </div>
+
+            <h2>The Three Classes of Levers</h2>
+            <div class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Lever_%28PSF%29.svg/640px-Lever_%28PSF%29.svg.png" alt="Three types of levers - First, Second, and Third Class" class="course-image" />
+                <p class="image-caption">The three classes of levers showing fulcrum, force, and resistance positions</p>
+                <div class="image-credit">
+                    📷 <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Lever_%28PSF%29.svg/640px-Lever_%28PSF%29.svg.png" target="_blank">Wikimedia.org</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>The Law of Levers (Lever Principle)</h2>
+            <div class="formula-box">
+                F × dF = R × dR
+            </div>
+            <div class="learning-card">
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li><strong>F</strong> = Applied force (effort)</li>
+                    <li><strong>dF</strong> = Distance from fulcrum to applied force (effort arm)</li>
+                    <li><strong>R</strong> = Resistance (load)</li>
+                    <li><strong>dR</strong> = Distance from fulcrum to resistance (resistance arm)</li>
+                </ul>
+            </div>
+
+            <h2>The Three Classes of Levers</h2>
+
+            <h3>First Class Lever</h3>
+            <div class="learning-card">
+                <p><strong>Position:</strong> Fulcrum is <strong>between</strong> the force and the resistance.</p>
+                <p><strong>Characteristic:</strong> Can multiply force AND change direction.</p>
+                <p><strong>Examples:</strong> Seesaw, crowbar, scissors, hammer claw.</p>
+                <div class="formula-box">
+                    ⚪ --- F ⚫ R ---
+                    (Fulcrum in the middle)
+                </div>
+            </div>
+
+            <h3>Second Class Lever</h3>
+            <div class="learning-card">
+                <p><strong>Position:</strong> Resistance is <strong>between</strong> the fulcrum and the force.</p>
+                <p><strong>Characteristic:</strong> Always multiplies force, easier to lift.</p>
+                <p><strong>Examples:</strong> Wheelbarrow, nutcracker, bottle opener.</p>
+                <div class="formula-box">
+                    F --- ⚫ R --- ⚪
+                    (Resistance in the middle)
+                </div>
+            </div>
+
+            <h3>Third Class Lever</h3>
+            <div class="learning-card">
+                <p><strong>Position:</strong> Force is <strong>between</strong> the fulcrum and the resistance.</p>
+                <p><strong>Characteristic:</strong> Increases distance traveled (less mechanical advantage).</p>
+                <p><strong>Examples:</strong> Fishing rod, forearm lifting, tweezers.</p>
+                <div class="formula-box">
+                    R --- ⚫ F --- ⚪
+                    (Force in the middle)
+                </div>
+            </div>
+
+            <h2>Mechanical Advantage of Levers</h2>
+            <div class="learning-card">
+                <div class="formula-box">
+                    Mechanical Advantage = dF / dR
+                </div>
+                <p><strong>Key Principle:</strong> The longer your effort arm (dF) compared to the resistance arm (dR), the greater the mechanical advantage, and the less force you need to apply.</p>
+            </div>
+
+            <h2>Example Problem</h2>
+            <div class="example-box">
+                <p><strong>Problem:</strong> You want to lift a 200 kg boulder using a 4-meter lever with the fulcrum positioned 1 meter from the boulder. How much force must you apply?</p>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>dR = 1 m (distance to resistance)</li>
+                    <li>dF = 3 m (distance to applied force)</li>
+                    <li>R = 200 kg</li>
+                    <li>F = (R × dR) / dF = (200 × 1) / 3 = 66.7 kg</li>
+                </ul>
+                <p><strong>Answer:</strong> You only need to apply 66.7 kg of force!</p>
+            </div>
+        </section>
+
+        <!-- ============ PULLEYS ============ -->
+        <section id="pulleys" class="section">
+            <h1>Pulleys: Lifting with Ease</h1>
+
+            <h2>What is a Pulley?</h2>
+            <div class="learning-card">
+                <p>A pulley is a <strong>wheel with a grooved rim</strong> that holds a rope or cable. It rotates around an axle and helps:</p>
+                <ul>
+                    <li>Change the direction of an applied force</li>
+                    <li>Reduce the effort needed to lift heavy objects</li>
+                    <li>Transmit motion and power</li>
+                </ul>
+            </div>
+
+            <div class="image-container">
+                <img src="https://eu.wikipedia.org/wiki/Fitxategi:Four_pulleys.svg" alt="Block and tackle pulley system showing multiple pulleys" class="course-image" />
+                <p class="image-caption">Block and tackle system - multiple pulleys reduce the force needed to lift heavy loads</p>
+                <div class="image-credit">
+                    📷 <a href="https://eu.wikipedia.org/wiki/Fitxategi:Four_pulleys.svg" target="_blank">Wikimedia.org</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>Fixed Pulley (Simple Pulley)</h2>
+            <div class="learning-card">
+                <p><strong>Characteristic:</strong> The pulley is attached to a fixed support and doesn't move.</p>
+                <p><strong>Advantage:</strong> Changes the direction of force (easier to pull down than to lift up).</p>
+                <p><strong>Mechanical Advantage:</strong> 1 (no force reduction, but more convenient to use).</p>
+                <div class="formula-box">
+                    F = R
+                </div>
+            </div>
+
+            <h2>Movable Pulley (Block &amp; Tackle)</h2>
+            <div class="learning-card">
+                <p><strong>Characteristic:</strong> Uses combinations of fixed and movable pulleys together.</p>
+                <p><strong>Advantage:</strong> Significantly reduces the force needed to lift objects.</p>
+                <div class="formula-box">
+                    F = R / n
+                </div>
+                <p><strong>Where n = number of supporting ropes</strong></p>
+            </div>
+
+            <h2>Pulley System Examples</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>System Type</th>
+                        <th>Number of Ropes</th>
+                        <th>Mechanical Advantage</th>
+                        <th>Force Needed to Lift 100 kg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Single Fixed</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>100 kg</td>
+                    </tr>
+                    <tr>
+                        <td>1 Movable</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>50 kg</td>
+                    </tr>
+                    <tr>
+                        <td>2 Movable</td>
+                        <td>4</td>
+                        <td>4</td>
+                        <td>25 kg</td>
+                    </tr>
+                    <tr>
+                        <td>3 Movable</td>
+                        <td>6</td>
+                        <td>6</td>
+                        <td>16.7 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success-box">
+                <p><strong>Remember:</strong> The more pulleys in your system, the less force you need to apply, but the more rope you have to pull!</p>
+            </div>
+        </section>
+
+        <!-- ============ GEARS ============ -->
+        <section id="gears" class="section">
+            <h1>Gears: Precision Power Transmission</h1>
+
+            <h2>What is a Gear?</h2>
+            <div class="learning-card">
+                <p>A gear is a <strong>toothed wheel</strong> that meshes with another gear to:</p>
+                <ul>
+                    <li>Transmit rotational motion between axes</li>
+                    <li>Change rotational speed</li>
+                    <li>Change direction of rotation</li>
+                    <li>Transmit large forces without slipping</li>
+                </ul>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1763195424/search_images/ef3644d82dbb92e95d0555443e0fa9e400b77dd1.jpg" alt="Types of gears - spur, bevel, and helical gears" class="course-image" />
+                <p class="image-caption">Different gear types: spur (parallel axes), bevel (perpendicular axes), and helical (angled teeth)</p>
+                <div class="image-credit">
+                    📷 <a href="https://engineersguidebook.com/types-of-gears-addvantages-disadvantages/" target="_blank">engineersguidebook.com/</a>
+                    | <span class="license-badge">Copyright</span>
+                </div>
+            </div>
+
+            <h2>Gear Characteristics</h2>
+            <ul>
+                <li><strong>No slipping:</strong> Teeth mesh perfectly, ensuring precise power transfer</li>
+                <li><strong>Direction reversal:</strong> When two gears mesh, they rotate in opposite directions</li>
+                <li><strong>Speed ratios:</strong> The ratio of teeth determines speed changes</li>
+            </ul>
+
+            <h2>Transmission Ratio (Gear Ratio)</h2>
+            <div class="formula-box">
+                i = N₂ / N₁ = Z₁ / Z₂
+            </div>
+            <div class="learning-card">
+                <p><strong>Where:</strong></p>
+                <ul>
+                    <li><strong>i</strong> = Transmission ratio</li>
+                    <li><strong>N₁</strong> = Speed of driving gear (rpm)</li>
+                    <li><strong>N₂</strong> = Speed of driven gear (rpm)</li>
+                    <li><strong>Z₁</strong> = Number of teeth on driving gear</li>
+                    <li><strong>Z₂</strong> = Number of teeth on driven gear</li>
+                </ul>
+            </div>
+
+            <h2>Gear Speed Classifications</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Ratio (i)</th>
+                        <th>Effect</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Speed Multiplier</strong></td>
+                        <td>i &gt; 1</td>
+                        <td>Output faster than input</td>
+                        <td>Small gear drives large gear</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No Change</strong></td>
+                        <td>i = 1</td>
+                        <td>Same speed input/output</td>
+                        <td>Equal-sized gears</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Speed Reducer</strong></td>
+                        <td>i &lt; 1</td>
+                        <td>Output slower than input</td>
+                        <td>Large gear drives small gear</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Types of Gears</h2>
+            <h3>Spur Gears</h3>
+            <div class="learning-card">
+                <p>Most common type with straight teeth perpendicular to the wheel face. Used for axes that are parallel and close together.</p>
+            </div>
+
+            <h3>Bevel Gears</h3>
+            <div class="learning-card">
+                <p>Cone-shaped gears with angled teeth. Used for perpendicular or non-parallel axes. Common in car differentials.</p>
+            </div>
+
+            <h3>Helical Gears</h3>
+            <div class="learning-card">
+                <p>Have curved, angled teeth. Quieter and smoother than spur gears, but more expensive.</p>
+            </div>
+
+            <h2>Example: Gear Calculation</h2>
+            <div class="example-box">
+                <p><strong>Problem:</strong> A motor turns a 20-tooth gear at 1000 rpm. This gear drives a 50-tooth gear. What is the output speed?</p>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>i = Z₁ / Z₂ = 20 / 50 = 0.4</li>
+                    <li>N₂ = N₁ × i = 1000 × 0.4 = 400 rpm</li>
+                </ul>
+                <p><strong>Answer:</strong> The output gear spins at 400 rpm (slowed down).</p>
+            </div>
+        </section>
+
+        <!-- ============ CHAIN DRIVE ============ -->
+        <section id="chain-drive" class="section">
+            <h1>Chain Drive Transmission</h1>
+
+            <div class="image-container">
+                <img src="https://commons.wikimedia.org/wiki/File:Morse_chain.jpg" alt="Chain drive with sprockets showing teeth engagement" class="course-image" />
+                <p class="image-caption">Chain drive system with sprockets transmitting rotational motion</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Morse_chain.jpg" target="_blank">Wikimedia.org</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>How Does Chain Drive Work?</h2>
+            <div class="learning-card">
+                <p>Chain drive uses a <strong>chain that engages with toothed wheels (sprockets)</strong> on two separate axes. The chain transfers motion from the driving sprocket to the driven sprocket.</p>
+                <p><strong>Key advantage:</strong> Transmits motion between axes that are farther apart than gears can handle.</p>
+            </div>
+
+            <h2>Characteristics of Chain Drive</h2>
+            <ul>
+                <li><strong>No slipping:</strong> Chain teeth mesh with sprocket teeth perfectly</li>
+                <li><strong>Same direction:</strong> Both sprockets rotate in the same direction</li>
+                <li><strong>Long distances:</strong> Can work with axes farther apart than gears</li>
+                <li><strong>Power transmission:</strong> Excellent for high-power transmission</li>
+            </ul>
+
+            <h2>Transmission Ratio</h2>
+            <div class="formula-box">
+                i = N₂ / N₁ = Z₁ / Z₂
+            </div>
+            <p>Same formula as gears! The ratio of teeth determines speed relationship.</p>
+
+            <h2>Applications of Chain Drive</h2>
+            <ul>
+                <li>Bicycles</li>
+                <li>Motorcycles</li>
+                <li>Automatic doors and gates</li>
+                <li>Conveyor systems</li>
+                <li>Industrial machinery</li>
+                <li>Power transmission in motors</li>
+            </ul>
+
+            <div class="success-box">
+                <p><strong>Advantage over gears:</strong> Chain drive can transmit motion between distant axes and is cheaper than equivalent gear systems.</p>
+            </div>
+        </section>
+
+        <!-- ============ BELT DRIVE ============ -->
+        <section id="belt-drive" class="section">
+            <h1>Belt and Pulley Drive</h1>
+
+            <div class="image-container">
+                <img src="https://commons.wikimedia.org/wiki/File:Belt_drive_systen_01.JPG" alt="Belt and pulley system showing multiple pulleys with belt" class="course-image" />
+                <p class="image-caption">Belt drive system with multiple pulleys for power transmission</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Belt_drive_systen_01.JPG" target="_blank">Wikimedia.org</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>How Does Belt Drive Work?</h2>
+            <div class="learning-card">
+                <p>Belt drive uses a <strong>flat or V-shaped belt</strong> that runs over two or more pulleys. The friction between the belt and pulleys transfers motion from the driving pulley to the driven pulley(s).</p>
+            </div>
+
+            <h2>Characteristics</h2>
+            <ul>
+                <li><strong>Flexible system:</strong> Can accommodate some misalignment</li>
+                <li><strong>Can slip:</strong> If overloaded, belt may slip (provides protection)</li>
+                <li><strong>Same direction:</strong> Both pulleys rotate in the same direction (open belt)</li>
+                <li><strong>Opposite direction:</strong> If belt crosses, pulleys rotate opposite ways</li>
+                <li><strong>Quiet operation:</strong> Quieter than gears or chains</li>
+            </ul>
+
+            <h2>Transmission Ratio</h2>
+            <div class="formula-box">
+                i = N₂ / N₁ = D₁ / D₂
+            </div>
+            <div class="learning-card">
+                <p><strong>Where D = Pulley Diameter</strong></p>
+                <p>The ratio of diameters determines the speed relationship.</p>
+            </div>
+
+            <h2>Common Applications</h2>
+            <ul>
+                <li>Washing machines</li>
+                <li>Fans and ventilation systems</li>
+                <li>Industrial motors</li>
+                <li>Drills and power tools</li>
+                <li>Air compressors</li>
+                <li>Pumps</li>
+            </ul>
+
+            <h2>Belt Drive System Example</h2>
+            <div class="example-box">
+                <p><strong>Problem:</strong> A motor with a 10 cm diameter pulley running at 1500 rpm drives a lathe with a 30 cm diameter pulley. How fast does the lathe spin?</p>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>i = D₁ / D₂ = 10 / 30 = 0.33</li>
+                    <li>N₂ = N₁ × i = 1500 × 0.33 = 500 rpm</li>
+                </ul>
+                <p><strong>Answer:</strong> The lathe spins at 500 rpm.</p>
+            </div>
+        </section>
+
+        <!-- ============ WORM GEAR ============ -->
+        <section id="worm-gear" class="section">
+            <h1>Worm Gear and Crown System</h1>
+
+            <div class="image-container">
+                <img src="https://commons.wikimedia.org/wiki/File:Schnecke10.gif" alt="Worm gear and crown wheel showing perpendicular arrangement" class="course-image" />
+                <p class="image-caption">Worm gear system with screw-like worm and crown wheel for perpendicular axis transmission</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Schnecke10.gif" target="_blank">Wikimedia.org</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>What is a Worm Gear?</h2>
+            <div class="learning-card">
+                <p>A worm gear system consists of a <strong>screw-like shaft (worm)</strong> that meshes with a <strong>toothed wheel (crown gear)</strong>. It's used to transmit motion between perpendicular axes.</p>
+            </div>
+
+            <h2>Key Characteristics</h2>
+            <ul>
+                <li><strong>Perpendicular axes:</strong> Axes are at 90 degrees to each other</li>
+                <li><strong>Extreme speed reduction:</strong> Provides very high mechanical advantage</li>
+                <li><strong>Non-reversible:</strong> Usually can't be driven backward (good for safety)</li>
+                <li><strong>High accuracy:</strong> Provides precise motion control</li>
+                <li><strong>Compact design:</strong> Space-efficient for high reduction ratios</li>
+            </ul>
+
+            <h2>Transmission Ratio</h2>
+            <div class="formula-box">
+                i = N₂ / N₁ = 1 / Z
+            </div>
+            <div class="learning-card">
+                <p><strong>Where Z = Number of teeth on the crown gear</strong></p>
+                <p>For every complete rotation of the worm, the crown gear advances by just one tooth!</p>
+            </div>
+
+            <h2>Example: Worm Gear Calculation</h2>
+            <div class="example-box">
+                <p><strong>Problem:</strong> A worm gear system has a 24-tooth crown gear and the worm rotates at 1800 rpm. What is the output speed?</p>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>i = 1 / Z = 1 / 24 = 0.042</li>
+                    <li>N₂ = N₁ × i = 1800 × 0.042 = 75 rpm</li>
+                </ul>
+                <p><strong>Answer:</strong> The crown gear rotates at only 75 rpm (extreme reduction!).</p>
+            </div>
+
+            <h2>Applications</h2>
+            <ul>
+                <li>Elevator and hoist systems</li>
+                <li>Printing press mechanisms</li>
+                <li>Tuning pegs on musical instruments</li>
+                <li>Steering systems in vehicles</li>
+                <li>Industrial machinery that needs high torque and low speed</li>
+            </ul>
+
+            <div class="success-box">
+                <p><strong>Advantage:</strong> Worm gears provide the highest mechanical advantage of any mechanical system, allowing you to lift very heavy loads with minimal effort!</p>
+            </div>
+        </section>
+
+        <!-- ============ RACK & PINION ============ -->
+        <section id="rack-pinion" class="section">
+            <h1>Rack and Pinion: Circular to Linear</h1>
+
+            <div class="image-container">
+                <img src="https://commons.wikimedia.org/wiki/File:Rack_and_pinion_animation.gif" alt="Rack and pinion mechanism showing pinion gear and linear rack" class="course-image" />
+                <p class="image-caption">Rack and pinion mechanism converting rotational to linear motion</p>
+                <div class="image-credit">
+                    📷 <a href="https://commons.wikimedia.org/wiki/File:Rack_and_pinion_animation.gif" target="_blank">Wikimedia.org</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>What is Rack and Pinion?</h2>
+            <div class="learning-card">
+                <p>Rack and pinion is a mechanism that <strong>converts circular motion into linear motion (or vice versa)</strong>.</p>
+                <ul>
+                    <li><strong>Pinion:</strong> A small toothed wheel (gear)</li>
+                    <li><strong>Rack:</strong> A flat bar with teeth along its length</li>
+                </ul>
+            </div>
+
+            <h2>How It Works</h2>
+            <h3>Circular to Linear (Motor-Driven)</h3>
+            <p>When the pinion rotates, it pushes on the rack's teeth, causing the rack to move in a straight line.</p>
+
+            <h3>Linear to Circular (Manual)</h3>
+            <p>When you push the rack, the pinion rotates. This is less common but used in some applications.</p>
+
+            <h2>Characteristics</h2>
+            <ul>
+                <li><strong>Efficient transmission:</strong> Direct tooth-to-tooth contact</li>
+                <li><strong>Precision motion:</strong> Smooth and predictable movement</li>
+                <li><strong>No slip:</strong> Teeth prevent any slipping</li>
+                <li><strong>Reversible:</strong> Can work in both directions</li>
+            </ul>
+
+            <h2>Real-World Applications</h2>
+            <ul>
+                <li>Automatic sliding doors (supermarkets, hospitals)</li>
+                <li>Parking garage gates and barriers</li>
+                <li>Dental drills and precision tools</li>
+                <li>Machine tool tables (lathes, mills)</li>
+                <li>Microscope focusing mechanisms</li>
+                <li>Linear actuators in robotics</li>
+                <li>Drawbridge and escalator mechanisms</li>
+            </ul>
+
+            <h2>Example Application</h2>
+            <div class="example-box">
+                <p><strong>Automatic Sliding Door System:</strong> A small electric motor turns a pinion gear. The pinion's teeth engage with a rack attached to the door. As the pinion rotates, the rack moves, smoothly sliding the door open or closed.</p>
+            </div>
+        </section>
+
+        <!-- ============ CAMS ============ -->
+        <section id="cam" class="section">
+            <h1>Cams and Eccentrics: Creating Complex Motion</h1>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1766375189/search_images/0deed56215e13ca43f1d8ffe614ca77953beccee.jpg" alt="Cam lobe with follower showing contact points" class="course-image" />
+                <p class="image-caption">Cam and follower mechanism for converting rotational to oscillating motion</p>
+                <div class="image-credit">
+                    📷 <a href="https://pplx-res.cloudinary.com/image/upload/v1766375189/search_images/0deed56215e13ca43f1d8ffe614ca77953beccee.jpg" target="_blank">Perplexity AI</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>What is a Cam?</h2>
+            <div class="learning-card">
+                <p>A cam is a <strong>rotating element with a specially shaped profile</strong> that converts rotational motion into complex linear or oscillating motion.</p>
+                <p>The shape of the cam determines the motion of the follower (the element it pushes).</p>
+            </div>
+
+            <h2>Components of a Cam System</h2>
+            <ul>
+                <li><strong>Cam:</strong> The rotating part with the shaped profile</li>
+                <li><strong>Follower:</strong> The part that stays in contact with the cam and follows its motion</li>
+                <li><strong>Spring:</strong> Keeps the follower pressed against the cam (maintains contact)</li>
+            </ul>
+
+            <h2>How Cams Work</h2>
+            <p>As the cam rotates, its irregular shape pushes the follower up and down (or back and forth). The follower moves following the cam's profile.</p>
+
+            <h2>Eccentric Cam</h2>
+            <div class="learning-card">
+                <p>An eccentric cam is a special type of cam shaped like a circle, but with its center offset from its axis of rotation. As it rotates, it creates a smooth up-and-down motion.</p>
+            </div>
+
+            <h2>Advantages of Cams</h2>
+            <ul>
+                <li>Can create complex, precisely timed motions</li>
+                <li>Compact design</li>
+                <li>Reliable and durable</li>
+                <li>No slipping or lost motion</li>
+            </ul>
+
+            <h2>Common Applications</h2>
+            <ul>
+                <li><strong>Car engines:</strong> Open and close valves at precise times</li>
+                <li><strong>Washing machine programmers:</strong> Control the sequence of wash cycles</li>
+                <li><strong>Fishing reel mechanisms:</strong> Control line feed and retract</li>
+                <li><strong>Electric shavers:</strong> Create vibrating motion</li>
+                <li><strong>Locks and latches:</strong> Control opening and closing</li>
+            </ul>
+
+            <h2>Example: Engine Valve Control</h2>
+            <div class="example-box">
+                <p><strong>In a car engine:</strong> Camshafts (rods with cams on them) rotate at precise speeds. As they rotate, the cams push on valve lifters, opening the intake and exhaust valves at exactly the right moment in the engine cycle. Perfect timing is essential for the engine to work efficiently!</p>
+            </div>
+        </section>
+
+        <!-- ============ CRANKSHAFT ============ -->
+        <section id="crankshaft" class="section">
+            <h1>Crank and Connecting Rod: Linear to Circular</h1>
+
+            <h2>What is a Crank and Connecting Rod?</h2>
+            <div class="learning-card">
+                <p>A crank and connecting rod mechanism <strong>converts linear motion (back-and-forth) into circular motion (rotation)</strong>.</p>
+                <ul>
+                    <li><strong>Crank:</strong> An arm attached to a rotating shaft</li>
+                    <li><strong>Connecting Rod:</strong> A rod that connects the crank to the moving element</li>
+                </ul>
+            </div>
+
+            <h2>How It Works</h2>
+            <p>As the shaft rotates, the crank arm moves in a circle. The connecting rod is attached to the crank, so it's pulled and pushed in a back-and-forth motion. This mechanism can work in reverse too: linear input creates circular output.</p>
+
+            <h2>The Two Directions</h2>
+            <h3>Circular to Linear (Motor-Driven)</h3>
+            <p>A rotating motor turns the crank, which pushes a piston back and forth in a cylinder.</p>
+
+            <h3>Linear to Circular (Manual-Driven)</h3>
+            <p>Pushing a rod back and forth causes the crank to rotate. This is how hand-cranked tools work.</p>
+
+            <h2>Key Characteristics</h2>
+            <ul>
+                <li>Creates smooth oscillating motion</li>
+                <li>Can convert between circular and linear motion</li>
+                <li>Very reliable and widely used</li>
+                <li>Used for both input and output transformations</li>
+            </ul>
+
+            <h2>Real-World Applications</h2>
+            <ul>
+                <li><strong>Car engines:</strong> Pistons move up and down, turning the crankshaft</li>
+                <li><strong>Steam locomotives:</strong> Converted steam's linear push into wheel rotation</li>
+                <li><strong>Windshield wipers:</strong> Electric motor rotates crank that moves wipers back and forth</li>
+                <li><strong>Sewing machines:</strong> Hand crank creates needle's up-and-down motion</li>
+                <li><strong>Hand drills:</strong> Circular handle turns bit</li>
+                <li><strong>Amusement park rides:</strong> Many attractions use this mechanism</li>
+            </ul>
+
+            <h2>Crankshaft</h2>
+            <div class="learning-card">
+                <p>When multiple crank mechanisms are combined on one shaft, it's called a <strong>crankshaft</strong>. This is essential in multi-cylinder engines!</p>
+                <p>Example: A 4-cylinder car engine has 4 pistons connected to the same crankshaft, each pushing at different times for smooth power delivery.</p>
+            </div>
+
+            <h2>Example: Steam Locomotive</h2>
+            <div class="example-box">
+                <p><strong>How it works:</strong></p>
+                <ol>
+                    <li>Steam pushes piston linearly</li>
+                    <li>Piston connects to crank via connecting rod</li>
+                    <li>Crank rotates the locomotive wheels</li>
+                    <li>Locomotive moves forward!</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ STEAM ENGINE ============ -->
+        <section id="steam-engine" class="section">
+            <h1>The Steam Engine: A Complete System</h1>
+
+            <h2>Historical Significance</h2>
+            <div class="learning-card">
+                <p>James Watt invented the modern steam engine in 1769. It was the first true <strong>motor</strong> and was the driving force behind the Industrial Revolution.</p>
+                <p>Steam engines were used in: factories, locomotives, ships, and countless machines.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1762969525/search_images/813df79a1badd312e120d3cae9f97f5058860283.jpg" alt="Historical steam locomotive showing boiler, pistons, and wheels" class="course-image" />
+                <p class="image-caption">Classic steam locomotive with visible boiler, pistons, and crank mechanism</p>
+                <div class="image-credit">
+                    📷 <a href="https://pplx-res.cloudinary.com/image/upload/v1762969525/search_images/813df79a1badd312e120d3cae9f97f5058860283.jpg" target="_blank">Perplexity AI</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>How a Steam Engine Works</h2>
+            <h3>Step-by-Step Process</h3>
+            <ol>
+                <li><strong>Fuel burn:</strong> Coal or wood burns in a furnace</li>
+                <li><strong>Water boils:</strong> Heat boils water in a boiler, creating steam</li>
+                <li><strong>Steam expansion:</strong> High-pressure steam enters a cylinder</li>
+                <li><strong>Piston movement:</strong> Steam pushes a piston linearly</li>
+                <li><strong>Valve control:</strong> Valves switch to exhaust the used steam</li>
+                <li><strong>Mechanical conversion:</strong> Crank and connecting rod convert linear piston motion to wheel rotation</li>
+                <li><strong>Power output:</strong> Wheels turn, locomotive moves!</li>
+            </ol>
+
+            <h2>Key Components</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Boiler</strong></td>
+                        <td>Heats water to create steam</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Furnace</strong></td>
+                        <td>Burns fuel for heat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cylinder &amp; Piston</strong></td>
+                        <td>Steam pushes piston for linear motion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Valves</strong></td>
+                        <td>Control steam flow in and out</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Condenser</strong></td>
+                        <td>Cools used steam back to water</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Crank &amp; Rod</strong></td>
+                        <td>Converts linear to circular motion</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Why Steam Engines Were Revolutionary</h2>
+            <ul>
+                <li>Much more powerful than human or animal muscles</li>
+                <li>Could work continuously</li>
+                <li>Could power factories, trains, and ships</li>
+                <li>Enabled massive increase in production</li>
+                <li>Changed society forever</li>
+            </ul>
+        </section>
+
+        <!-- ============ GAS ENGINE ============ -->
+        <section id="gas-engine" class="section">
+            <h1>The Gasoline Engine: Modern Power</h1>
+
+            <h2>Introduction</h2>
+            <div class="learning-card">
+                <p>The gasoline engine is the most common engine in cars, motorcycles, and many other machines. It's based on the principle of controlled explosions inside a cylinder.</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1767102575/search_images/8c04ff9981371ba31b7a25439b4ae1ae6e466bcf.jpg" alt="Four-stroke engine cycle showing intake, compression, combustion, and exhaust" class="course-image" />
+                <p class="image-caption">The four-stroke cycle of a gasoline engine: intake, compression, combustion, and exhaust</p>
+                <div class="image-credit">
+                    📷 <a href="https://pplx-res.cloudinary.com/image/upload/v1767102575/search_images/8c04ff9981371ba31b7a25439b4ae1ae6e466bcf.jpg" target="_blank">Perplexity AI</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>The Four-Stroke Cycle</h2>
+            <p>A typical gasoline engine operates in four strokes (movements) per cylinder:</p>
+
+            <h3>Stroke 1: Intake (Intake Valve Opens)</h3>
+            <div class="learning-card">
+                <p><strong>What happens:</strong> The piston moves down, creating a vacuum. The intake valve opens, and a mixture of gasoline and air enters the cylinder.</p>
+                <p><strong>Purpose:</strong> Fill the cylinder with fuel for combustion.</p>
+            </div>
+
+            <h3>Stroke 2: Compression (Both Valves Closed)</h3>
+            <div class="learning-card">
+                <p><strong>What happens:</strong> The piston moves up, compressing the fuel-air mixture into a small space. Both valves remain closed.</p>
+                <p><strong>Purpose:</strong> Compress the mixture so it burns more powerfully.</p>
+            </div>
+
+            <h3>Stroke 3: Combustion/Power (Both Valves Closed)</h3>
+            <div class="learning-card">
+                <p><strong>What happens:</strong> The spark plug ignites the compressed fuel-air mixture, causing a small explosion. The hot, expanding gases push the piston down powerfully.</p>
+                <p><strong>Purpose:</strong> Create the power stroke that drives the engine.</p>
+            </div>
+
+            <h3>Stroke 4: Exhaust (Exhaust Valve Opens)</h3>
+            <div class="learning-card">
+                <p><strong>What happens:</strong> The piston moves up again. The exhaust valve opens, allowing burned gases to escape from the cylinder.</p>
+                <p><strong>Purpose:</strong> Clear the cylinder for the next cycle.</p>
+            </div>
+
+            <h2>The Cycle Repeats</h2>
+            <p>In a typical car engine running at 3000 rpm, this entire 4-stroke cycle completes 750 times per second in each cylinder!</p>
+
+            <h2>Multi-Cylinder Engines</h2>
+            <div class="learning-card">
+                <p>Most car engines have 4, 6, or 8 cylinders. Each cylinder operates on the same 4-stroke cycle, but they're <strong>staggered</strong> so that one cylinder is always in its power stroke (pushing), providing smooth, continuous power.</p>
+            </div>
+
+            <h2>Key Engine Components</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Piston</strong></td>
+                        <td>Moves up and down in the cylinder, pushed by explosions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Connecting Rod</strong></td>
+                        <td>Connects piston to crankshaft</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Crankshaft</strong></td>
+                        <td>Converts linear piston motion to rotational motion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intake Valve</strong></td>
+                        <td>Opens to allow fuel-air mixture in</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exhaust Valve</strong></td>
+                        <td>Opens to let burned gases out</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spark Plug</strong></td>
+                        <td>Creates spark to ignite fuel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Camshaft</strong></td>
+                        <td>Controls opening and closing of valves using cams</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Power Transmission</h2>
+            <div class="learning-card">
+                <p>The rotational power from the crankshaft is transmitted to the wheels through:</p>
+                <ol>
+                    <li>Clutch (connects/disconnects engine from transmission)</li>
+                    <li>Transmission (gears that allow speed changes)</li>
+                    <li>Differential (splits power to left/right wheels)</li>
+                    <li>Axles and wheels</li>
+                </ol>
+            </div>
+
+            <div class="success-box">
+                <p><strong>Amazing fact:</strong> In a 4-cylinder engine running at just 2000 rpm, there are 4000 explosions per minute—and the engine manages all this controlled chaos perfectly!</p>
+            </div>
+        </section>
+
+        <!-- ============ BICYCLE ============ -->
+        <section id="bicycle" class="section">
+            <h1>Bicycle Mechanics: Simple Yet Elegant</h1>
+
+            <h2>The Human-Powered Machine</h2>
+            <div class="learning-card">
+                <p>A bicycle is one of the most efficient machines ever created. Your leg muscles provide the power, and a simple mechanism transmits that power to the wheels.</p>
+                <p><strong>Efficiency:</strong> Up to 90% of your pedaling power goes into moving the bike (amazing!).</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://pplx-res.cloudinary.com/image/upload/v1767102575/search_images/70e8b8e555e00ca06d1afb84325517183756fe20.jpg" alt="Bicycle chain and sprocket mechanism showing chainring and gears" class="course-image" />
+                <p class="image-caption">Bicycle chain transmission system - chainring drives the chain which rotates the rear sprocket</p>
+                <div class="image-credit">
+                    📷 <a href="https://pplx-res.cloudinary.com/image/upload/v1767102575/search_images/70e8b8e555e00ca06d1afb84325517183756fe20.jpg" target="_blank">Perplexity AI</a>
+                    | <span class="license-badge">CC-BY-SA 4.0</span>
+                </div>
+            </div>
+
+            <h2>Bicycle Components &amp; Their Roles</h2>
+
+            <h3>Driving Element: Your Legs</h3>
+            <div class="learning-card">
+                <p>You provide rotational power by pedaling. You typically pedal at 60-100 rpm (revolutions per minute).</p>
+            </div>
+
+            <h3>Mechanism: Chainring, Chain, Sprocket System</h3>
+            <div class="learning-card">
+                <ul>
+                    <li><strong>Chainring (Crankset):</strong> Large toothed wheel connected to your pedals</li>
+                    <li><strong>Chain:</strong> Transmits power without slipping</li>
+                    <li><strong>Sprocket (Cog):</strong> Smaller toothed wheel at the rear wheel</li>
+                </ul>
+                <p><strong>How it works:</strong> As you pedal, the chainring rotates. The chain engages with the chainring teeth and pulls the rear sprocket, making the wheel turn.</p>
+            </div>
+
+            <h3>Driven Element: The Wheels</h3>
+            <div class="learning-card">
+                <p>The rear wheel rotates and propels the bike forward. The wheel's circumference and the sprocket speed determine your forward speed.</p>
+            </div>
+
+            <h2>Gear Ratios &amp; Cycling</h2>
+            <div class="learning-card">
+                <div class="formula-box">
+                    Gear Ratio = Chainring Teeth / Sprocket Teeth
+                </div>
+                <p>A higher ratio means the wheel turns more times per pedal rotation (faster, but harder to pedal).</p>
+                <p>A lower ratio means the wheel turns fewer times (slower, but easier to pedal).</p>
+            </div>
+
+            <h2>Multi-Speed Bicycles</h2>
+            <div class="learning-card">
+                <p><strong>Derailleurs:</strong> Shift the chain between different sprockets or chainrings to change the gear ratio.</p>
+                <p><strong>Why multiple gears?</strong></p>
+                <ul>
+                    <li>Low gears for climbing hills (easier pedaling, slower speed)</li>
+                    <li>High gears for flat terrain and speed (harder pedaling, faster speed)</li>
+                    <li>Choose the gear that matches the terrain and your strength</li>
+                </ul>
+            </div>
+
+            <h2>Example: Bicycle Gear Calculation</h2>
+            <div class="example-box">
+                <p><strong>Problem:</strong> You're riding a bike with a 52-tooth chainring and a 13-tooth rear sprocket. Your wheel is 0.7 meters in diameter. If you pedal at 90 rpm, how fast are you going?</p>
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>Gear ratio = 52 / 13 = 4</li>
+                    <li>Wheel rotations = 90 rpm × 4 = 360 rpm</li>
+                    <li>Distance per rotation = π × 0.7 m = 2.2 m</li>
+                    <li>Speed = 360 × 2.2 m = 792 m per minute = 13.2 m/s = 47.5 km/h</li>
+                </ul>
+                <p><strong>Answer:</strong> You're traveling at 47.5 km/h!</p>
+            </div>
+
+            <h2>The Beauty of Bicycle Design</h2>
+            <ul>
+                <li>Simple and reliable</li>
+                <li>Minimal maintenance</li>
+                <li>Extremely efficient</li>
+                <li>Scales perfectly with human power</li>
+                <li>Unchanged fundamental design for 100+ years</li>
+            </ul>
+
+            <div class="success-box">
+                <p><strong>Fun fact:</strong> A bicycle is the most efficient form of human transportation ever invented! It's even more efficient than walking.</p>
+            </div>
+        </section>
+
+        <!-- ============ EXERCISES ============ -->
+        <section id="exercises" class="section">
+            <h1>Practice Exercises</h1>
+            <p>Test your understanding with these problems from real machines:</p>
+
+            <h2>Lever Problems</h2>
+            <div class="exercise-question">
+                <div class="question-text">1. A lever with effort distance = 2m and load distance = 0.5m needs to lift a 200 kg load. How much force must be applied?</div>
+                <input type="text" placeholder="Enter your answer (kg)" id="q1" />
+                <button class="btn btn-primary" onclick="checkExercise1()">Check Answer</button>
+                <div id="feedback1"></div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">2. What type of lever has the fulcrum between the force and the resistance?</div>
+                <div class="option" onclick="selectOption(this, 'lever2', 'First')">
+                    <input type="radio" name="lever2" value="First" /> First class
+                </div>
+                <div class="option" onclick="selectOption(this, 'lever2', 'Second')">
+                    <input type="radio" name="lever2" value="Second" /> Second class
+                </div>
+                <div class="option" onclick="selectOption(this, 'lever2', 'Third')">
+                    <input type="radio" name="lever2" value="Third" /> Third class
+                </div>
+                <button class="btn btn-primary" onclick="checkLever()">Check Answer</button>
+                <div id="feedbackLever"></div>
+            </div>
+
+            <h2>Gear &amp; Transmission Problems</h2>
+            <div class="exercise-question">
+                <div class="question-text">3. A motor running at 1000 rpm drives a 20-tooth gear. This gear meshes with a 60-tooth gear. What is the output speed?</div>
+                <input type="text" placeholder="Enter your answer (rpm)" id="q3" />
+                <button class="btn btn-primary" onclick="checkExercise3()">Check Answer</button>
+                <div id="feedback3"></div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">4. A belt drive has a 10 cm driving pulley and a 30 cm driven pulley. If the driving pulley rotates at 1500 rpm, what is the speed of the driven pulley?</div>
+                <input type="text" placeholder="Enter your answer (rpm)" id="q4" />
+                <button class="btn btn-primary" onclick="checkExercise4()">Check Answer</button>
+                <div id="feedback4"></div>
+            </div>
+
+            <h2>Pulley Problems</h2>
+            <div class="exercise-question">
+                <div class="question-text">5. A block and tackle system has 4 supporting ropes. How much force must you apply to lift a 400 kg load?</div>
+                <input type="text" placeholder="Enter your answer (kg)" id="q5" />
+                <button class="btn btn-primary" onclick="checkExercise5()">Check Answer</button>
+                <div id="feedback5"></div>
+            </div>
+
+            <h2>Worm Gear Problems</h2>
+            <div class="exercise-question">
+                <div class="question-text">6. A worm gear system has a 30-tooth crown gear and the worm rotates at 1200 rpm. What is the output speed?</div>
+                <input type="text" placeholder="Enter your answer (rpm)" id="q6" />
+                <button class="btn btn-primary" onclick="checkExercise6()">Check Answer</button>
+                <div id="feedback6"></div>
+            </div>
+        </section>
+
+        <!-- ============ QUIZ ============ -->
+        <section id="quiz" class="section">
+            <h1>Knowledge Quiz</h1>
+            <p>Test your overall understanding of mechanisms and machines:</p>
+
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Progress</span>
+                    <span id="quizProgress">0/5</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgressBar"></div>
+                </div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">1. What is the primary purpose of a machine?</div>
+                <div class="option" onclick="selectQuizOption(this, 'q1', 'A')">
+                    <input type="radio" name="q1" value="A" /> To create motion from nothing
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q1', 'B')">
+                    <input type="radio" name="q1" value="B" /> To reduce effort needed to perform work
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q1', 'C')">
+                    <input type="radio" name="q1" value="C" /> To increase weight
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q1', 'D')">
+                    <input type="radio" name="q1" value="D" /> To decrease work done
+                </div>
+                <div id="quizFeedback1"></div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">2. Which mechanism converts circular motion to linear motion?</div>
+                <div class="option" onclick="selectQuizOption(this, 'q2', 'A')">
+                    <input type="radio" name="q2" value="A" /> Gear
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q2', 'B')">
+                    <input type="radio" name="q2" value="B" /> Pulley
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q2', 'C')">
+                    <input type="radio" name="q2" value="C" /> Rack and Pinion
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q2', 'D')">
+                    <input type="radio" name="q2" value="D" /> Lever
+                </div>
+                <div id="quizFeedback2"></div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">3. The mechanical advantage of a pulley system depends on:</div>
+                <div class="option" onclick="selectQuizOption(this, 'q3', 'A')">
+                    <input type="radio" name="q3" value="A" /> The color of the pulley
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q3', 'B')">
+                    <input type="radio" name="q3" value="B" /> The number of supporting ropes
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q3', 'C')">
+                    <input type="radio" name="q3" value="C" /> The material of the rope
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q3', 'D')">
+                    <input type="radio" name="q3" value="D" /> The weight of the pulley
+                </div>
+                <div id="quizFeedback3"></div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">4. Which of these is a transformation mechanism?</div>
+                <div class="option" onclick="selectQuizOption(this, 'q4', 'A')">
+                    <input type="radio" name="q4" value="A" /> Belt drive
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q4', 'B')">
+                    <input type="radio" name="q4" value="B" /> Chain drive
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q4', 'C')">
+                    <input type="radio" name="q4" value="C" /> Crank and connecting rod
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q4', 'D')">
+                    <input type="radio" name="q4" value="D" /> Gear train
+                </div>
+                <div id="quizFeedback4"></div>
+            </div>
+
+            <div class="exercise-question">
+                <div class="question-text">5. A worm gear provides:</div>
+                <div class="option" onclick="selectQuizOption(this, 'q5', 'A')">
+                    <input type="radio" name="q5" value="A" /> Very high speed
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q5', 'B')">
+                    <input type="radio" name="q5" value="B" /> Very high speed reduction and mechanical advantage
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q5', 'C')">
+                    <input type="radio" name="q5" value="C" /> No mechanical advantage
+                </div>
+                <div class="option" onclick="selectQuizOption(this, 'q5', 'D')">
+                    <input type="radio" name="q5" value="D" /> Reversible motion
+                </div>
+                <div id="quizFeedback5"></div>
+            </div>
+
+            <button class="btn btn-success" onclick="submitQuiz()" style="margin-top: 2rem;">Submit Quiz</button>
+            <div id="quizResults" style="margin-top: 2rem;"></div>
+        </section>
+
+    </main>
+</div>
+
+<!-- ============ JAVASCRIPT ============ -->
+<script>
+    // Navigation functionality
+    function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+
+        // Show selected section
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Update sidebar
+        const items = document.querySelectorAll('.sidebar-item');
+        items.forEach(item => item.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    // Accordion functionality
+    function toggleAccordion(header) {
+        const item = header.parentElement;
+        item.classList.toggle('active');
+    }
+
+    // Exercise checking functions
+    function checkExercise1() {
+        const answer = parseFloat(document.getElementById('q1').value);
+        const correct = 50; // F = (200 × 0.5) / 2
+        const feedback = document.getElementById('feedback1');
+        
+        if (Math.abs(answer - correct) < 1) {
+            feedback.innerHTML = '<div class="feedback correct">✓ Correct! F = (200 × 0.5) / 2 = 50 kg</div>';
+        } else {
+            feedback.innerHTML = '<div class="feedback incorrect">✗ Not quite. Use the formula F = (R × dR) / dF = (200 × 0.5) / 2 = 50 kg</div>';
+        }
+    }
+
+    function checkLever() {
+        const selected = document.querySelector('input[name="lever2"]:checked');
+        const feedback = document.getElementById('feedbackLever');
+        
+        if (selected && selected.value === 'First') {
+            feedback.innerHTML = '<div class="feedback correct">✓ Correct! First class levers have the fulcrum in the middle.</div>';
+        } else {
+            feedback.innerHTML = '<div class="feedback incorrect">✗ Wrong. First class levers have fulcrum between force and resistance.</div>';
+        }
+    }
+
+    function checkExercise3() {
+        const answer = parseFloat(document.getElementById('q3').value);
+        const correct = 333.33; // 1000 × (20/60)
+        const feedback = document.getElementById('feedback3');
+        
+        if (Math.abs(answer - correct) < 5) {
+            feedback.innerHTML = '<div class="feedback correct">✓ Correct! Speed = 1000 × (20/60) ≈ 333.3 rpm</div>';
+        } else {
+            feedback.innerHTML = '<div class="feedback incorrect">✗ Not quite. Use i = Z₁/Z₂ = 20/60, then N₂ = 1000 × 0.33 ≈ 333.3 rpm</div>';
+        }
+    }
+
+    function checkExercise4() {
+        const answer = parseFloat(document.getElementById('q4').value);
+        const correct = 500; // 1500 × (10/30)
+        const feedback = document.getElementById('feedback4');
+        
+        if (Math.abs(answer - correct) < 5) {
+            feedback.innerHTML = '<div class="feedback correct">✓ Correct! Speed = 1500 × (10/30) = 500 rpm</div>';
+        } else {
+            feedback.innerHTML = '<div class="feedback incorrect">✗ Not quite. Use ratio = D₁/D₂ = 10/30, then N₂ = 1500 × 0.33 = 500 rpm</div>';
+        }
+    }
+
+    function checkExercise5() {
+        const answer = parseFloat(document.getElementById('q5').value);
+        const correct = 100; // 400 / 4
+        const feedback = document.getElementById('feedback5');
+        
+        if (Math.abs(answer - correct) < 1) {
+            feedback.innerHTML = '<div class="feedback correct">✓ Correct! Force = 400 / 4 = 100 kg</div>';
+        } else {
+            feedback.innerHTML = '<div class="feedback incorrect">✗ Not quite. With 4 ropes supporting, you divide the load by 4: 400 / 4 = 100 kg</div>';
+        }
+    }
+
+    function checkExercise6() {
+        const answer = parseFloat(document.getElementById('q6').value);
+        const correct = 40; // 1200 / 30
+        const feedback = document.getElementById('feedback6');
+        
+        if (Math.abs(answer - correct) < 1) {
+            feedback.innerHTML = '<div class="feedback correct">✓ Correct! Speed = 1200 / 30 = 40 rpm</div>';
+        } else {
+            feedback.innerHTML = '<div class="feedback incorrect">✗ Not quite. Use i = 1/Z = 1/30, then N₂ = 1200 × (1/30) = 40 rpm</div>';
+        }
+    }
+
+    // Quiz functions
+    function selectOption(element, groupName, value) {
+        const options = document.querySelectorAll(`input[name="${groupName}"]`);
+        options.forEach(opt => opt.checked = false);
+        const parent = element.closest('.option');
+        parent.classList.remove('selected');
+        element.querySelector('input').checked = true;
+        element.parentElement.classList.add('selected');
+    }
+
+    function selectQuizOption(element, questionName, value) {
+        const options = document.querySelectorAll(`input[name="${questionName}"]`);
+        options.forEach(opt => opt.checked = false);
+        const parents = document.querySelectorAll(`.option input[name="${questionName}"]`);
+        parents.forEach(p => p.parentElement.classList.remove('selected'));
+        element.querySelector('input').checked = true;
+        element.classList.add('selected');
+    }
+
+    const quizAnswers = {
+        'q1': 'B',
+        'q2': 'C',
+        'q3': 'B',
+        'q4': 'C',
+        'q5': 'B'
+    };
+
+    function submitQuiz() {
+        let score = 0;
+        for (let i = 1; i <= 5; i++) {
+            const qName = 'q' + i;
+            const selected = document.querySelector(`input[name="${qName}"]:checked`);
+            const feedback = document.getElementById('quizFeedback' + i);
+            
+            if (selected) {
+                const answer = selected.value;
+                const correct = quizAnswers[qName];
+                
+                if (answer === correct) {
+                    score++;
+                    feedback.innerHTML = '<div class="feedback correct">✓ Correct!</div>';
+                } else {
+                    feedback.innerHTML = '<div class="feedback incorrect">✗ Incorrect. Try again!</div>';
+                }
+            } else {
+                feedback.innerHTML = '<div class="feedback incorrect">✗ Please select an answer</div>';
+            }
+        }
+
+        const resultsDiv = document.getElementById('quizResults');
+        const percentage = (score / 5) * 100;
+        resultsDiv.innerHTML = `<div class="success-box"><strong>Your Score: ${score}/5 (${percentage}%)</strong><br/>${percentage >= 80 ? 'Excellent work!' : percentage >= 60 ? 'Good job! Review the material for more practice.' : 'Keep studying and try again!'}</div>`;
+    }
+
+    function showProgress() {
+        alert('Progress tracking coming soon! You are learning: Mechanisms & Machines\n\n✓ Completed sections: Intro, Definitions, Machine Parts\n⏳ In progress: Transmission Mechanisms\n⬜ To explore: Real Applications\n\nKeep going!');
+    }
+</script>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <strong>Mechanisms & Machines Course</strong> 
+        made by <a href="https://berezuma.com" target="_blank">Beñat Erezuma</a>
+        | <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC-BY-SA 4.0</a>
+        <span style="float: right; font-size: 0.8rem;">
+            📚 Educational Project
+        </span>
+    </div>
+</footer>
+
+</body>
+</html>
